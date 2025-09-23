@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Object in JavaScript</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    #output { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <h2>Student Information</h2>
+  <div id="output"></div>
+
+  <script>
+    // Step 1: Create student object
+    const student = {
+      name: "Rahul",
+      grade: 40,
+      subjects: ["FSD", "RM", "DBMS"],
+      passed: false, // will update later
+      info() {
+        return `
+          Name: ${this.name}<br>
+          Grade: ${this.grade}<br>
+          Subjects: ${this.subjects.join(", ")}<br>
+          Passed: ${this.passed}<br>
+        `;
+      }
+    };
+
+    // Step 2: Dynamically update 'passed' property
+    student.passed = student.grade >= 50;
+
+    // Step 3: Show info using method
+    let result = "<strong>Display Info Method:</strong><br>" + student.info();
+
+    // Step 4: Show all non-function properties
+    result += "<br><strong>All Properties:</strong><br>";
+    for (let key in student) {
+      if (typeof student[key] !== "function") {
+        let value = Array.isArray(student[key]) ? "["+student[key].join(", ")+"]" : student[key];
+        result += key + ": " + value + "<br>";
+      }
+    }
+
+    // Step 5: Output on page
+    document.getElementById("output").innerHTML = result;
+  </script>
+</body>
+</html>
